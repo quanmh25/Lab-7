@@ -1,0 +1,92 @@
+Thư viện `requests` trong Python cung cấp nhiều hàm hữu ích để thực hiện các yêu cầu HTTP. Dưới đây là danh sách các hàm chính trong thư viện `requests`:
+
+### Hàm chính trong `requests`
+1. **requests.get(url, params=None, **kwargs)**
+   - Gửi một yêu cầu GET tới `url`.
+   - `params` (tùy chọn): Dictionary hoặc bytes gửi trong URL.
+   - Trả về một đối tượng `Response`.
+
+2. **requests.post(url, data=None, json=None, **kwargs)**
+   - Gửi một yêu cầu POST tới `url`.
+   - `data` (tùy chọn): Dictionary, bytes, hoặc file gửi trong phần thân của yêu cầu.
+   - `json` (tùy chọn): JSON gửi trong phần thân của yêu cầu.
+   - Trả về một đối tượng `Response`.
+
+3. **requests.put(url, data=None, **kwargs)**
+   - Gửi một yêu cầu PUT tới `url`.
+   - `data` (tùy chọn): Dictionary, bytes, hoặc file gửi trong phần thân của yêu cầu.
+   - Trả về một đối tượng `Response`.
+
+4. **requests.delete(url, **kwargs)**
+   - Gửi một yêu cầu DELETE tới `url`.
+   - Trả về một đối tượng `Response`.
+
+5. **requests.head(url, **kwargs)**
+   - Gửi một yêu cầu HEAD tới `url`.
+   - Trả về một đối tượng `Response`.
+
+6. **requests.options(url, **kwargs)**
+   - Gửi một yêu cầu OPTIONS tới `url`.
+   - Trả về một đối tượng `Response`.
+
+### Sử dụng các hàm chính
+Dưới đây là một số ví dụ về cách sử dụng các hàm này:
+
+#### Sử dụng `requests.get`
+import requests
+
+url = "https://api.example.com/data"
+response = requests.get(url)
+print(response.json())
+
+### Sử dụng requests.post
+import requests
+
+url = "https://api.example.com/upload"
+payload = {"key": "value"}
+response = requests.post(url, data=payload)
+print(response.json())
+
+### Sử dụng requests.put
+import requests
+
+url = "https://api.example.com/update"
+payload = {"key": "updated_value"}
+response = requests.put(url, data=payload)
+print(response.json())
+
+### Sử dụng requests.delete
+import requests
+
+url = "https://api.example.com/resource/1"
+response = requests.delete(url)
+print(response.status_code)
+
+### Sử dụng requests.head
+import requests
+
+url = "https://api.example.com/data"
+response = requests.head(url)
+print(response.headers)
+
+### Sử dụng requests.options
+import requests
+
+url = "https://api.example.com/data"
+response = requests.options(url)
+print(response.headers)
+
+
+GET Request
+    Mục đích: Lấy dữ liệu từ máy chủ.
+    Cách sử dụng: Các tham số truy vấn được gửi trong URL.
+    Ví dụ: Truy cập một trang web hoặc lấy thông tin từ API.
+    Bảo mật: Dữ liệu được gửi trong URL nên không an toàn cho thông tin nhạy cảm.
+    Giới hạn kích thước: Có giới hạn về độ dài của URL (thường khoảng 2048 ký tự).
+
+POST Request
+    Mục đích: Gửi dữ liệu tới máy chủ.
+    Cách sử dụng: Dữ liệu được gửi trong phần thân của yêu cầu HTTP.
+    Ví dụ: Đăng nhập, đăng ký, gửi biểu mẫu.
+    Bảo mật: An toàn hơn cho thông tin nhạy cảm vì dữ liệu được gửi trong phần thân yêu cầu.
+    Giới hạn kích thước: Không bị giới hạn bởi độ dài URL.
