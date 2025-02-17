@@ -20,3 +20,9 @@ while True:
             print("Я жду 0, 1 или 2, человек!")
 
 
+# Tìm thời thông tin thời tiết ở 1 thành phố
+city_name = "Madrid"
+key = ""
+response = requests.post(f"https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={key}")
+result = json.loads(response.text)
+print(result)
