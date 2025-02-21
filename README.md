@@ -2,7 +2,7 @@
 
 ## Лабораторная работа №7
 
-Работа с API
+Работа с API (Application Programming Interface)
 
 **Задание**
 
