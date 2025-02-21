@@ -1,0 +1,48 @@
+# To explain code in file extra_task.py 
+
+def get_image():
+    url = "https://randomfox.ca/floof/"
+    res = requests.get(url)
+    data = res.json()
+    # print(data)
+    img = data['image']
+    res_img = requests.get(img)                         # Use requests to get photos from website
+    img_main = res_img.content                         
+  
+    img_convert = Image.open(io.BytesIO(img_main))      # Convert binary data to a PIL image object
+    return img_convert
+
+
+# Image.open(BytesIO(img_data)): Hàm Image.open của thư viện Pillow (PIL) sẽ mở đối tượng stream để tạo ra một đối tượng hình ảnh (PIL.Image).
+# Đối tượng này có thể được hiển thị trong giao diện người dùng.
+
+
+# label.config(image=img_tk) dùng phương thức config của widget tkinter để thay đổi thuộc tính image của nhãn label thành đối tượng PhotoImage mới img_tk.
+# Giúp hiển thị ảnh mới trên nhãn thay thế ảnh cũ
+
+# label.image = img_tk giữ một tham chiếu tới đối tượng PhotoImage trong thuộc tính image của nhãn. 
+# Điều này rất quan trọng vì nếu không giữ tham chiếu, đối tượng PhotoImage có thể bị thu hồi (garbage collected) bởi Python, dẫn đến việc ảnh không hiển thị đúng.
+
+
+img_main = res_img.content                          # Thuộc tính content của đối tượng img_response chứa nội dung nhị phân của ảnh. Đây là dữ liệu thô của ảnh.
+
+
+#### Có thể không dùng .content, thay vào đó ta có thể dùng cách sau
+
+from urllib.request import urlopen
+
+def fetch_image():
+    response = requests.get("https://randomfox.ca/floof/")
+    data = response.json()
+    image_url = data['image']
+    img_response = urlopen(image_url)               # Phương thức urlopen() từ thư viện urllib.request mở URL của ảnh và trả về đối tượng phản hồi chứa nội dung ảnh.
+    img_data = img_response.read()                  # Phương thức img_response.read() đọc nội dung nhị phân của ảnh từ phản hồi HTTP và lưu trữ dữ liệu vào biến img_data.
+    img = Image.open(BytesIO(img_data))             # Phương thức Image.open() từ thư viện Pillow (PIL) mở dữ liệu nhị phân từ đối tượng BytesIO và tạo ra một đối tượng ảnh PIL.
+                                                    # Đối tượng img chứa ảnh có thể được xử lý và hiển thị trong giao diện người dùng.
+    return img
+
+def update_image():
+    img = fetch_image()
+    img_tk = ImageTk.PhotoImage(img)
+    label.config(image=img_tk)
+    label.image = img_tk  
